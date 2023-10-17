@@ -24,7 +24,9 @@ create table if not exists Pinche (
 	fk_DNI varchar(10) primary key,
     fecha_nacimiento date,
     fk_DNI_cocinero varchar(10),
-    FOREIGN KEY (fk_DNI) references Empleado(DNI),
+    FOREIGN KEY (fk_DNI) references Empleado(DNI)
+ON DELETE CASCADE
+    ON UPDATE CASCADE,
     foreign key (fk_DNI_cocinero) references Cocinero(fk_DNI)
 	ON DELETE CASCADE
     ON UPDATE CASCADE
@@ -40,7 +42,9 @@ create table if not exists Plato (
 create table if not exists Cocina (
 	fk_DNI varchar(10),
     fk_id_plato int,
-    FOREIGN KEY (fk_DNI) references Cocinero(fk_DNI),
+    FOREIGN KEY (fk_DNI) references Cocinero(fk_DNI)
+ON DELETE CASCADE
+    ON UPDATE CASCADE,
     foreign key (fk_id_plato) references Plato(id_plato)
 	ON DELETE CASCADE
     ON UPDATE CASCADE
@@ -73,7 +77,9 @@ create table if not exists Almacen (
 create table if not exists Almacena (
 	fk_id_almacen int,
     fk_id_estanteria int,
-	foreign key (fk_id_almacen) references Almacen(id_almacen),
+	foreign key (fk_id_almacen) references Almacen(id_almacen)
+ON DELETE CASCADE
+    ON UPDATE CASCADE,
     foreign key (fk_id_estanteria) references Estanteria(id_estanteria)
 	ON DELETE CASCADE
     ON UPDATE CASCADE
@@ -82,7 +88,9 @@ create table if not exists Almacena (
 create table if not exists Elabora (
 	fk_id_plato int,
     fk_id_ingrediente int,
-    foreign key (fk_id_plato) references Plato(id_plato),
+    foreign key (fk_id_plato) references Plato(id_plato)
+ON DELETE CASCADE
+    ON UPDATE CASCADE,
     foreign key (fk_id_ingrediente) references Ingrediente(id_ingrediente)
 	ON DELETE CASCADE
     ON UPDATE CASCADE
@@ -92,7 +100,9 @@ create table if not exists Elabora (
 create table if not exists Guarda (
 	fk_id_ingrediente int,
     fk_id_estanteria int,
-	foreign key (fk_id_ingrediente) references Ingrediente(id_ingrediente),
+	foreign key (fk_id_ingrediente) references Ingrediente(id_ingrediente)
+ON DELETE CASCADE
+    ON UPDATE CASCADE,
     foreign key (fk_id_estanteria) references Estanteria(id_estanteria)
 	ON DELETE CASCADE
     ON UPDATE CASCADE
