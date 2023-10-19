@@ -21,6 +21,7 @@ create table if not exists Alumno (
 create table if not exists Trabajar(
 	fk_CIF varchar(10),
     fk_DNI varchar(10),
+    primary key (fk_CIF, fk_DNI),
     foreign key (fk_CIF) REFERENCES Empresa(CIF)
 		ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -49,6 +50,7 @@ create table if not exists Curso (
 create table if not exists Impartir(
 	fk_DNI varchar(10),
     fk_codigo varchar(10),
+    primary key (fk_DNI, fk_codigo),
     foreign key (fk_DNI) REFERENCES Profesor(DNI)
     		ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -60,6 +62,7 @@ create table if not exists Impartir(
 create table if not exists Cursar(
 	fk_DNI varchar(10),
     fk_codigo varchar(10),
+	primary key (fk_DNI, fk_codigo),
     foreign key (fk_codigo) REFERENCES Curso(codigo)
     		ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -78,6 +81,7 @@ create table if not exists DatosCurso (
 create table if not exists Corresponder(
 	fk_codigo_curso varchar(10),
     fk_codigo_datos varchar(10),
+    primary key (fk_codigo_curso, fk_codigo_datos),
     foreign key (fk_codigo_curso) REFERENCES Curso(codigo)
     		ON DELETE CASCADE
     ON UPDATE CASCADE,
