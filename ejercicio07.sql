@@ -17,8 +17,7 @@ create table if not exists Nomina (
     id_nomina int primary key,
     fecha date,
     salario double,
-    nombre_trabajador varchar(150),
-	salario double
+    nombre_trabajador varchar(150)
 );
 
 create table if not exists Empleado (
