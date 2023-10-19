@@ -4,11 +4,11 @@ use ejercicio04;
 
 create table if not exists Guerra (
 	id_guerra int primary key,
-    año_inicio int,
-    año_fin int,
+    año_inicio DATE,
+    año_fin DATE,
     nombre varchar(255)
 );
-
+.
 create table if not exists Bando (
 	id_bando int primary key,
     nombre varchar(255),
@@ -28,9 +28,8 @@ create table if not exists Pais (
 create table if not exists Periodo (
 	id_periodo int primary key,
     fk_id_pais int,
-    fecha_inicio int,
-    fecha_fin int,
-    periodo_independencia varchar(255),
+    fecha_inicio DATE,
+    fecha_fin DATE,
     foreign key (fk_id_pais) references Pais(id_pais)
     ON DELETE CASCADE
     ON UPDATE CASCADE
