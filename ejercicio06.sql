@@ -26,8 +26,11 @@ create table if not exists Prestamo(
     fecha_inicio date,
     fecha_fin date,
     fecha_devolucion date,
-    foreign key (fk_DNI) REFERENCES Socio(DNI),
+    primary key(fk_DNI, fk_codigo_articulo),
+    foreign key (fk_DNI) REFERENCES Socio(DNI)
+    ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key (fk_codigo_articulo) references Articulo(codigo_articulo)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table if not exists Libro(
@@ -35,8 +38,8 @@ create table if not exists Libro(
     fk_codigo_articulo INT,
     escritor varchar(255),
     num_paginas int,
-
     foreign key (fk_codigo_articulo) references Articulo(codigo_articulo)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table if not exists CD(
@@ -45,6 +48,7 @@ create table if not exists CD(
     interprete varchar(255),
     num_canciones int,
     foreign key (fk_codigo_articulo) REFERENCES Articulo(codigo_articulo)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table if not exists Pelicula(
@@ -53,6 +57,7 @@ create table if not exists Pelicula(
     director varchar(255),
     duracion int,
     foreign key (fk_codigo_articulo) REFERENCES Articulo(codigo_articulo)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table if not exists Autor(
@@ -61,13 +66,17 @@ create table if not exists Autor(
     interprete varchar(255),
     num_canciones int,
     foreign key (fk_codigo_articulo) REFERENCES Articulo(codigo_articulo)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table if not exists Crea (
 	fk_id_autor int,
     fk_codigo_articulo int,
-    foreign key (fk_id_autor) references Autor(id_autor),
+    primary key (fk_id_autor, fk_codigo_articulo),
+    foreign key (fk_id_autor) references Autor(id_autor)
+    ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key (fk_codigo_articulo) references Articulo (codigo_articulo)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
     
 
