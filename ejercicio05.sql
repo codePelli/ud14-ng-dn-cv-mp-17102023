@@ -4,7 +4,7 @@ use ejercicio5;
 
 create table if not exists Pieza (
 	id_pieza varchar(10) PRIMARY KEY,
-    descripcion varchar(255),
+    descripcion text,
     precio double
 );
 
@@ -40,7 +40,7 @@ create table if not exists Guarda(
 create table if not exists Almacen (
 	num_almacen varchar(10) PRIMARY KEY,
 	descripcion text,
-    direccion varchar(40)
+    direccion varchar(60)
 );
 
 create table if not exists Contiene (
