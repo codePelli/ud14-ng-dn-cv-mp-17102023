@@ -40,6 +40,7 @@ create table if not exists Participan (
     fk_id_trabajador int,
     cargo_ejecutado varchar(255),
     horas_trabajadas int,
+    primary key(fk_id_proyecto, fk_id_trabajador),
     foreign key (fk_id_proyecto) references Proyecto(id_proyecto)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
