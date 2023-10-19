@@ -8,7 +8,7 @@ create table if not exists Guerra (
     año_fin DATE,
     nombre varchar(255)
 );
-.
+
 create table if not exists Bando (
 	id_bando int primary key,
     nombre varchar(255),
