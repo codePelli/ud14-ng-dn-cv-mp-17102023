@@ -4,7 +4,6 @@ use ejercicio07;
 
 create table if not exists Departamento (
     id_departamento int primary key,
-    fk_id_coordinador int,
     nombre_departamento varchar(255)
 );
 
@@ -16,7 +15,9 @@ create table if not exists Contrato (
 
 create table if not exists Nomina (
     id_nomina int primary key,
-	salario double
+    fecha date,
+    salario double,
+    nombre_trabajador varchar(150)
 );
 
 create table if not exists Empleado (
@@ -30,7 +31,11 @@ create table if not exists Empleado (
     apellidos varchar(255),
     direccion varchar(255),
     telefono int,
-    foreign key (fk_id_departamento) references Departamento(id_departamento),
-	foreign key (fk_id_responsable) references Empleado(id_trabajador),
+    es_coordinador boolean,
+    foreign key (fk_id_departamento) references Departamento(id_departamento)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+	foreign key (fk_id_responsable) references Empleado(id_trabajador)
+    ON DELETE CASCADE ON UPDATE CASCADE,
 	foreign key (fk_id_contrato) references Contrato(id_contrato)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
