@@ -26,6 +26,7 @@ create table if not exists  Comida (
 create table if not exists  Prepara (
     fk_id_ingrediente int,
     fk_id_comida int,
+    primary key (fk_id_ingrediente, fk_id_comida),
     foreign key(fk_id_ingrediente) references Ingrediente(id_ingrediente)
         ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -37,7 +38,8 @@ create table if not exists  Prepara (
 create table if not exists  Contiene (
     fk_id_ingrediente int,
     fk_id_receta int,
-    cantidad_ingredientes double,
+    cantidad_ingredientes int,
+    primary key (fk_id_ingrediente, fk_id_receta),
     foreign key (fk_id_ingrediente) references Ingrediente(id_ingrediente)    ON DELETE CASCADE
     ON UPDATE CASCADE,
     foreign key (fk_id_receta) references Receta(id_receta)
