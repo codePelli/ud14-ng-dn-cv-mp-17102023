@@ -1,16 +1,18 @@
-drop database if exists ejercicio5;
-create database if not exists ejercicio5;
-use ejercicio5;
+drop database if exists ud14_ejercicio06;
+create database if not exists ud14_ejercicio06;
+use ud14_ejercicio06;
 
-create table Peliculas(
-	codigo int primary key,
-    nombre nvarchar(100),
-    calificacion_edad int
+CREATE TABLE Peliculas (
+    codigo INT PRIMARY KEY,
+    nombre NVARCHAR(100),
+    calificacion_edad INT
 );
 
-Create table Salas(
-	codigo int primary key,
-    nombre nvarchar(100),
-    pelicula int,
-    foreign key (pelicula) references Peliculas(codigo)
+CREATE TABLE Salas (
+    codigo INT PRIMARY KEY,
+    nombre NVARCHAR(100),
+    pelicula INT,
+    FOREIGN KEY (pelicula)
+        REFERENCES Peliculas (codigo)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );

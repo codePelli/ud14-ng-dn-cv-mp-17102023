@@ -1,17 +1,19 @@
-drop database if exists ejercicio5;
-create database if not exists ejercicio5;
-use ejercicio5;
+drop database if exists ud14_ejercicio05;
+create database if not exists ud14_ejercicio05;
+use ud14_ejercicio05;
 
-create table almacen (
-	codigo int primary key,
-    lugar nvarchar(100),
-    capacidad int
+CREATE TABLE almacen (
+    codigo INT PRIMARY KEY,
+    lugar NVARCHAR(100),
+    capacidad INT
 );
 
-create table caja (
-	num_referencia char(5) primary key,
-    contenido nvarchar(100),
-    valor int,
-    almacen int,
-    foreign key(almacen) references almacen(codigo)
+CREATE TABLE caja (
+    num_referencia CHAR(5) PRIMARY KEY,
+    contenido NVARCHAR(100),
+    valor INT,
+    almacen INT,
+    FOREIGN KEY (almacen)
+        REFERENCES almacen (codigo)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );

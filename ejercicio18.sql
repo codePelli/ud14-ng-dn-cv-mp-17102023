@@ -10,18 +10,21 @@ create table if not exists Inmueble (
 );
 
 create table if not exists Garaje (
-    fk_codigo INT,
+    fk_codigo INT primary key,
     numero INT,
     planta INT,
     FOREIGN KEY (fk_codigo) REFERENCES Inmueble(codigo)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table if not exists Piso (
-    fk_codigo INT,
+    fk_codigo INT primary key,
     codigo_esp VARCHAR(255),
     fk_id_garaje INT,
-    FOREIGN KEY (fk_codigo) REFERENCES Inmueble(codigo),
+    FOREIGN KEY (fk_codigo) REFERENCES Inmueble(codigo)
+    ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (fk_id_garaje) REFERENCES Garaje(fk_codigo)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -30,6 +33,7 @@ create table if not exists Local (
     tipo_uso VARCHAR(255),
     tiene_servicio BOOLEAN,
     FOREIGN KEY (fk_codigo) REFERENCES Inmueble(codigo)
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table if not exists Persona (
@@ -73,19 +77,30 @@ create table if not exists Comprar (
     ON UPDATE CASCADE
 );
 
-create table if not exists ContratoAlquiler (
-    codigo INT PRIMARY KEY,
-    numero_alquiler INT,
-    nombre_agente VARCHAR(255),
-    empresa VARCHAR(255),
-    persona_alquiler VARCHAR(10),
-    precio double
+create table if not exists Alquiler (
+	codigo int primary key,
+    numero_alquiler int,
+    nombre_agente varchar(255),
+    empresa varchar(150),
+    persona_alquiler varchar(150),
+    precio decimal,
+    fk_id_cliente int,
+    fk_id_trabajador int,
+    foreign key (fk_id_cliente) references Cliente(id_cliente)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    foreign key (fk_id_trabajador) references Trabajador(id_trabajador)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 create table if not exists PagoAlquiler (
-    id_pago INT PRIMARY KEY,
-    persona_alquiler VARCHAR(10),
-    año_pago INT,
-    mes_pago INT,
-    precio double
+	id_pago int primary key,
+    ano_pago int,
+    mes_pago int,
+    precio decimal,
+    fk_codigo_alquiler int,
+    foreign key (fk_codigo_alquiler) references Alquiler(codigo)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );

@@ -1,30 +1,34 @@
-drop database if exists ejercicio10;
-create database if not exists ejercicio10;
-use ejercicio10;
+drop database if exists ud14_ejercicio10;
+create database if not exists ud14_ejercicio10;
+use ud14_ejercicio10;
 
-create table if not exists Cajero (
-	codigo int primary key,
-    nomapels varchar(255)
+CREATE TABLE IF NOT EXISTS Cajero (
+    codigo INT PRIMARY KEY,
+    nomapels VARCHAR(255)
 );
 
-create table if not exists Maquina_registradora (
-	codigo int primary key,
-    piso int
+CREATE TABLE IF NOT EXISTS Maquina_registradora (
+    codigo INT PRIMARY KEY,
+    piso INT
 );
 
-create table if not exists Producto (
-	codigo int primary key,
-    nombre nvarchar(100),
-    precio int
+CREATE TABLE IF NOT EXISTS Producto (
+    codigo INT PRIMARY KEY,
+    nombre NVARCHAR(100),
+    precio INT
 );
 
-create table if not exists Venta (
-	fk1_codigo int primary key,
-    fk2_codigo int,
-    fk3_codigo int,
-    FOREIGN KEY (fk1_codigo) references Cajero(codigo),
-    FOREIGN KEY (fk2_codigo) references Maquina_registradora(codigo),
-    FOREIGN KEY (fk3_codigo) references Producto(codigo)
-	ON DELETE CASCADE
-    ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS Venta (
+    fk1_codigo INT PRIMARY KEY,
+    fk2_codigo INT,
+    fk3_codigo INT,
+    FOREIGN KEY (fk1_codigo)
+        REFERENCES Cajero (codigo)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (fk2_codigo)
+        REFERENCES Maquina_registradora (codigo)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (fk3_codigo)
+        REFERENCES Producto (codigo)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
