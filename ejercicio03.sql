@@ -3,13 +3,13 @@ create database if not exists ejercicio03;
 use ejercicio03;
 
 create table if not exists ComunidadAutonoma (
-	nombre varchar(255) primary key,
+	nombre varchar(255) primary key unique,
     poblacion int,
     superficie double
 );
 
 create table if not exists Provincia (
-	cod_postal int primary key,
+	cod_postal int primary key ,
     fk_nombre_ca varchar(255),
     nombre varchar(255),
 	foreign key (fk_nombre_ca) references ComunidadAutonoma(nombre)
