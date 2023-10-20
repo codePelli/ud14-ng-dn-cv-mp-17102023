@@ -29,8 +29,9 @@ create table if not exists Compone (
 );
 
 create table if not exists Dia (
-	fecha date primary key,
+    id_dia int primary key auto_increment,
     num_personas int
+	fecha date
 );
 
 create table if not exists Sirve (
@@ -40,18 +41,18 @@ create table if not exists Sirve (
     foreign key (fk_id_menu) references Menu(id_menu)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-	foreign key (fk_fecha_sirve) references Dia(fecha)
+	foreign key (fk_fecha_sirve) references Dia(id_dia)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
 
 create table if not exists Consume (
-	fk_fecha_consume date,
+	fk_id_dia date,
 	fk_id_plato varchar(20),
     cantidad int,
     plato_exitoso varchar(40),
-    primary key (fk_fecha_consume,fk_id_plato),
-    foreign key (fk_fecha_consume) references Dia(fecha)
+    primary key (fk__id_dia,fk_id_plato),
+    foreign key (fk_id_dia) references Dia(id_dia)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
 	foreign key (fk_id_plato) references Plato(id_plato)
