@@ -5,12 +5,12 @@ use ud14_ejercicio08;
 
 CREATE TABLE IF NOT EXISTS Proveedor (
     Id CHAR(4) PRIMARY KEY NOT NULL,
-    Nombre NVARCHAR(100)
+    Nombre VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS Pieza (
     Codigo INT PRIMARY KEY AUTO_INCREMENT,
-    Nombre NVARCHAR(100)
+    Nombre VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS Suministra (

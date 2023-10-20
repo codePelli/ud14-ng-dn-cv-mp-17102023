@@ -5,12 +5,12 @@ use ud14_ejercicio09;
 
 CREATE TABLE IF NOT EXISTS Cientifico (
     DNI VARCHAR(8) PRIMARY KEY NOT NULL,
-    NomApels NVARCHAR(255)
+    NomApels VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS Proyecto (
     Id CHAR(4) PRIMARY KEY NOT NULL,
-    Nombre NVARCHAR(255),
+    Nombre VARCHAR(255),
     Horas INT
 );
 
