@@ -9,26 +9,25 @@ create table if not exists Empresa (
     edad int
 );
 
-create table if not exists Alumno (
-	DNI varchar(20) PRIMARY KEY,
-    nombre varchar(255),
-    apellidos varchar(255),
-    direccion varchar(255),
-    telefono varchar(12),
-    edad int
+CREATE TABLE IF NOT EXISTS Alumno (
+    DNI VARCHAR(20) PRIMARY KEY,
+    nombre VARCHAR(255),
+    apellidos VARCHAR(255),
+    direccion VARCHAR(255),
+    telefono VARCHAR(12),
+    edad INT
 );
 
-create table if not exists Trabajar(
-	fk_CIF varchar(20),
-    fk_DNI varchar(20),
-    primary key (fk_CIF, fk_DNI),
-    foreign key (fk_CIF) REFERENCES Empresa(CIF)
-		ON DELETE CASCADE
-    ON UPDATE CASCADE,
-    foreign key (fk_DNI) references Alumno(DNI)
-		ON DELETE CASCADE
-    ON UPDATE CASCADE
-    
+CREATE TABLE IF NOT EXISTS Trabajar (
+    fk_CIF VARCHAR(20),
+    fk_DNI VARCHAR(20),
+    PRIMARY KEY (fk_CIF , fk_DNI),
+    FOREIGN KEY (fk_CIF)
+        REFERENCES Empresa (CIF)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (fk_DNI)
+        REFERENCES Alumno (DNI)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table if not exists Profesor (
@@ -39,12 +38,12 @@ create table if not exists Profesor (
     telefono varchar(12)
 );
 
-create table if not exists Curso (
-	codigo varchar(20) PRIMARY KEY,
-    programa varchar(255),
-    duracion time,
-    titulo varchar(255),
-    numero int
+CREATE TABLE IF NOT EXISTS Curso (
+    codigo VARCHAR(20) PRIMARY KEY,
+    programa VARCHAR(255),
+    duracion TIME,
+    titulo VARCHAR(255),
+    numero INT
 );
 
 create table if not exists Impartir(
@@ -89,4 +88,8 @@ create table if not exists Corresponder(
     		ON DELETE CASCADE
     ON UPDATE CASCADE
 );
+
+-- INSERTS --
+
+-- Empresa --
 
