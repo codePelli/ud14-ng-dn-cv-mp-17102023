@@ -2,39 +2,41 @@ drop database if exists ud14_ejercicio12;
 create database if not exists ud14_ejercicio12;
 use ud14_ejercicio12;
 
-create table profesores(
-dni varchar(9) primary key,
-nombre varchar(100) not null unique,
-apellido1 varchar(100) not null,
-apellido2 varchar(100) not null,
-direccion varchar(100),
-titulo varchar(100),
-gana int not null
+CREATE TABLE IF NOT EXISTS Profesor (
+    dni VARCHAR(9) PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL UNIQUE,
+    apellido1 VARCHAR(100) NOT NULL,
+    apellido2 VARCHAR(100) NOT NULL,
+    direccion VARCHAR(100),
+    titulo VARCHAR(100),
+    gana INT NOT NULL
 );
-create table cursos(
-cod_curso varchar(10) primary key not null,
-nombre_curso varchar(100) not null unique,
-dni_profesor varchar(9) ,
-max_alumnos int,
-fecha_inicio date,
-fecha_fin date ,
-num_horas int not null,
-foreign key(dni_profesor) references profesores(dni)
-on delete cascade
-on update cascade,
-check(fecha_inicio < fecha_fin)
+
+CREATE TABLE IF NOT EXISTS Curso (
+    cod_curso VARCHAR(10) PRIMARY KEY NOT NULL,
+    nombre_curso VARCHAR(100) NOT NULL UNIQUE,
+    dni_profesor VARCHAR(9),
+    max_alumnos INT,
+    fecha_inicio DATE,
+    fecha_fin DATE,
+    num_horas INT NOT NULL,
+    FOREIGN KEY (dni_profesor)
+        REFERENCES Profesor (dni)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CHECK (fecha_inicio < fecha_fin)
 );
-create table alumnos(
-nombre varchar(100),
-apellido1 varchar(100),
-apellido2 varchar(100),
-dni varchar(9) not null,
-direcccion varchar(100),
-sexo varchar(1) check(sexo like"M" or sexo like"H") default "H",
-fecha_nacimiento date,
-curso varchar(10) not null,
-primary key(dni),
-foreign key(curso) references cursos(cod_curso)
-on delete cascade
-on update cascade
+
+create table if not exists Alumno (
+	nombre varchar(100),
+	apellido1 varchar(100),
+	apellido2 varchar(100),
+	dni varchar(9) not null,
+	direcccion varchar(100),
+	sexo varchar(1) check(sexo like"M" or sexo like"H") default "H",
+	fecha_nacimiento date,
+	curso varchar(10) not null,
+	primary key(dni),
+	foreign key(curso) references Curso(cod_curso)
+	on delete cascade
+	on update cascade
 );
