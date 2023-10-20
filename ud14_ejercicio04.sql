@@ -1,17 +1,19 @@
-drop database if exists ejercicio4;
-create database if not exists ejercicio4;
-use ejercicio4;
+drop database if exists ud14_ejercicio04;
+create database if not exists ud14_ejercicio04;
+use ud14_ejercicio04;
 
-create table if not exists Departamentos(
-	codigo int PRIMARY KEY,
-    nombre nvarchar(100),
-    presupuesto int
+CREATE TABLE IF NOT EXISTS Departamentos (
+    codigo INT PRIMARY KEY,
+    nombre NVARCHAR(100),
+    presupuesto INT
 );
 
-create table if not exists Empleados (
-	DNI varchar(8) PRIMARY KEY,
-    nombre nvarchar(100),
-    apellidos nvarchar(255),
-    departamento int,
-   foreign key (departamento) REFERENCES Departamentos(codigo)
+CREATE TABLE IF NOT EXISTS Empleados (
+    DNI VARCHAR(8) PRIMARY KEY,
+    nombre NVARCHAR(100),
+    apellidos NVARCHAR(255),
+    departamento INT,
+    FOREIGN KEY (departamento)
+        REFERENCES Departamentos (codigo)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );

@@ -1,79 +1,87 @@
-drop database if exists ejercio2;
-create database if not exists ejercio2;
-use ejercio2;
+drop database if exists ud14_ejercicio02;
+create database if not exists ud14_ejercicio02;
+use ud14_ejercicio02;
 
-create table if not exists Tema (
-	ClaveTema smallint primary key auto_increment,
-    Nombre varchar(40)
+CREATE TABLE IF NOT EXISTS Tema (
+    ClaveTema SMALLINT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(40)
 );
 
-create table if not exists Autor (
-	ClaveAutor int primary key auto_increment,
-    Nombre varchar(60)
+CREATE TABLE IF NOT EXISTS Autor (
+    ClaveAutor INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(60)
 );
 
-create table if not exists Editorial (
-	ClaveEditorial smallint primary key auto_increment,
-    Nombre varchar(60),
-    Direccion varchar(60),
-    Telefono varchar(15)
+CREATE TABLE IF NOT EXISTS Editorial (
+    ClaveEditorial SMALLINT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(60),
+    Direccion VARCHAR(60),
+    Telefono VARCHAR(15)
 );
 
-create table if not exists Libro (
-	ClaveLibro int primary key auto_increment,
-    Titulo varchar(60),
-    Idioma varchar(15),
-    Formato varchar(15),
-    ClaveEditorial smallint,
-    foreign key (ClaveEditorial) references Editorial(ClaveEditorial)
-    ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS Libro (
+    ClaveLibro INT PRIMARY KEY AUTO_INCREMENT,
+    Titulo VARCHAR(60),
+    Idioma VARCHAR(15),
+    Formato VARCHAR(15),
+    ClaveEditorial SMALLINT,
+    FOREIGN KEY (ClaveEditorial)
+        REFERENCES Editorial (ClaveEditorial)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-create table if not exists Ejemplar (
-	ClaveEjemplar int primary key auto_increment,
-	ClaveLibro int,
-    NumeroOrden smallint,
-    Edicion smallint,
-    Ubicacion varchar(15),
-    Categoria char,
-	foreign key (ClaveLibro) references Libro(ClaveLibro)
-    ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS Ejemplar (
+    ClaveEjemplar INT PRIMARY KEY AUTO_INCREMENT,
+    ClaveLibro INT,
+    NumeroOrden SMALLINT,
+    Edicion SMALLINT,
+    Ubicacion VARCHAR(15),
+    Categoria CHAR,
+    FOREIGN KEY (ClaveLibro)
+        REFERENCES Libro (ClaveLibro)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-create table if not exists Socio (
-	ClaveSocio int primary key auto_increment,
-    Nombre varchar(60),
-    Direccion varchar(60),
-    Telefono varchar(15),
-    Categoria char
+CREATE TABLE IF NOT EXISTS Socio (
+    ClaveSocio INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(60),
+    Direccion VARCHAR(60),
+    Telefono VARCHAR(15),
+    Categoria CHAR
 );
 
-create table if not exists Prestamo (
-	ClaveSocio int primary key auto_increment,
-	ClaveEjemplar int,
-	NumeroOrden smallint,
-	Fecha_prestamo date,
-    Fecha_devolucion date,
-    Notas blob,
-    foreign key (ClaveEjemplar) references Ejemplar(ClaveEjemplar)
-    ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS Prestamo (
+    ClaveSocio INT,
+    ClaveEjemplar INT,
+    NumeroOrden SMALLINT,
+    Fecha_prestamo DATE,
+    Fecha_devolucion DATE,
+    Notas BLOB,
+    FOREIGN KEY (ClaveEjemplar)
+        REFERENCES Ejemplar (ClaveEjemplar)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ClaveSocio)
+        REFERENCES Socio (ClaveSocio)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
-create table if not exists Trata_sobre (
-	ClaveLibro int,
-	ClaveTema smallint,
-    foreign key (ClaveLibro) references Libro(ClaveLibro)
-    ON DELETE CASCADE ON UPDATE CASCADE,
-    foreign key (ClaveTema) references Tema(ClaveTema)
-    ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-create table if not exists Escrito_por (
-	ClaveLibro int,
-	ClaveAutor int,
-    foreign key (ClaveLibro) references Libro(ClaveLibro)
-    ON DELETE CASCADE ON UPDATE CASCADE,
-    foreign key (ClaveAutor) references Autor(ClaveAutor)
-    ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS Trata_sobre (
+    ClaveLibro INT,
+    ClaveTema SMALLINT,
+    FOREIGN KEY (ClaveLibro)
+        REFERENCES Libro (ClaveLibro)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ClaveTema)
+        REFERENCES Tema (ClaveTema)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
+CREATE TABLE IF NOT EXISTS Escrito_por (
+    ClaveLibro INT,
+    ClaveAutor INT,
+    FOREIGN KEY (ClaveLibro)
+        REFERENCES Libro (ClaveLibro)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ClaveAutor)
+        REFERENCES Autor (ClaveAutor)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);

@@ -1,33 +1,39 @@
-drop database if exists ejercicio11;
-create database if not exists ejercicio11;
-use ejercicio11;
+drop database if exists ud14_ejercicio11;
+create database if not exists ud14_ejercicio11;
+use ud14_ejercicio11;
 
-create table if not exists Facultad (
-	codigo int primary key,
-    nombre nvarchar(100)
+CREATE TABLE IF NOT EXISTS Facultad (
+    codigo INT PRIMARY KEY,
+    nombre NVARCHAR(100)
 );
 
-create table if not exists Equipo (
-	num_serie char(4) primary key,
-    nombre nvarchar(100),
-    facultad int,
-    FOREIGN KEY (facultad) references Facultad(codigo)
+CREATE TABLE IF NOT EXISTS Equipo (
+    num_serie CHAR(4) PRIMARY KEY,
+    nombre NVARCHAR(100),
+    facultad INT,
+    FOREIGN KEY (facultad)
+        REFERENCES Facultad (codigo)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-create table if not exists Investigador (
-	dni varchar(8) primary key,
-    nomapels nvarchar(255),
-    facultad int,
-    FOREIGN KEY (facultad) references Facultad(codigo)
+CREATE TABLE IF NOT EXISTS Investigador (
+    dni VARCHAR(8) PRIMARY KEY,
+    nomapels NVARCHAR(255),
+    facultad INT,
+    FOREIGN KEY (facultad)
+        REFERENCES Facultad (codigo)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-create table if not exists Reserva (
-    fk_num_serie char(4) primary key,
-    fk_dni varchar(8),
-    comienzo date,
-    fin date,
-    FOREIGN KEY (fk_dni) references Investigador(dni),
-    FOREIGN KEY (fk_num_serie) references Equipo(num_serie)
-	ON DELETE CASCADE
-    ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS Reserva (
+    fk_num_serie CHAR(4) PRIMARY KEY,
+    fk_dni VARCHAR(8),
+    comienzo DATE,
+    fin DATE,
+    FOREIGN KEY (fk_dni)
+        REFERENCES Investigador (dni)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (fk_num_serie)
+        REFERENCES Equipo (num_serie)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
